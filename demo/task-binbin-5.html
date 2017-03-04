@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IFE JavaScript Task 05</title>
+    </head>
+    <style>
+        body
+        {
+            margin:0;
+            padding:20px;
+        }
+
+        /*用一个灰色背景的div表示队列容器，采用flex布局，从而简化了调节队列元素位置的过程*/
+        div#quene
+        {
+            margin:20px 0;
+            padding:20px;
+            min-width:25%;
+            max-width:100%;
+            height: 320px;
+            background-color: darkgray;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items:flex-end;
+        }
+
+        /*队列元素位于flex容器中*/
+        div.sub-block
+        {
+            margin:10px 1px;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 0;
+            flex-shrink: 1;
+            width: 20px;
+            background-color: red;
+        }
+    </style>
+
+    <body>
+    <div>
+        <input id="number-input" type="number" placeholder="请输入要入队列的数" >
+        <button id="left-in" >左侧入</button>
+        <button id="right-in">右侧入</button>
+        <button id="left-out">左侧出</button>
+        <button id="right-out">右侧出</button>
+        <button id="bubble-sort">冒泡排序</button>
+        <button id="random-array">随机生成</button>
+    </div>
+    <div id="quene"></div>
+
+<script type="text/javascript" src="../bin/task-binbin-5.js"></script>
+</body>
+</html>

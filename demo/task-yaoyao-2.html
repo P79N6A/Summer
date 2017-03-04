@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript YaoYao Task 01</title>
+</head>
+<style>
+    *
+    {
+        margin:0;
+        padding:0;
+    }
+    input#input {
+        border: 1px solid lightgray;
+        border-radius: 4px;
+        width: 200px;
+        height: 30px;
+    }
+    
+    input#btn {
+        background-color: dodgerblue;
+        margin-left:200px;
+        color: white;
+        width: 80px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+    }
+    div.input-item
+    {
+        width:300px;
+        height: 50px;
+    }
+
+    div.input-item span
+    {
+        display:inline-block;
+        width:6em;
+        height: 2em;
+        padding:auto;
+        margin-right:20px;
+        text-align:right;
+    }
+
+    p.tip
+    {
+        display:block;
+        color:"gray";
+    }
+    p
+    {
+        display:none;
+        margin-left:115px;
+        font-size: 0.5em;
+    }
+    
+    p.error {
+        display:block;
+        color: red;
+    }
+    
+    p.pass {
+        display:block;
+        color: green;
+    }
+</style>
+<body>
+    <form>
+        <div class="input-item">
+            <label><span>名称</span><input type="text" id="name" value=""></label>
+            <p id="name-feedback">必填，长度为4~16字符</p>
+        </div>
+
+        <div class="input-item">
+            <label><span>密码</span><input type="password" id="pwd" value=""></label>
+            <p id="pwd-feedback">必填，长度为4~16字符</p>
+        </div>
+
+        <div  class="input-item">
+            <label><span>密码确认</span><input type="password" id="pwd-2" value=""></label>
+            <p id="pwd-2-feedback">必填，长度为4~16字符</p><br>
+        </div>
+
+        <div  class="input-item">
+            <label><span>邮箱</span><input type="email" id="email" value=""></label>
+            <p id="email-feedback">必填，长度为4~16字符</p><br>
+        </div>
+
+        <div  class="input-item">
+            <label><span>手机</span><input type="number" id="phone" value=""></label>
+            <p id="phone-feedback">必填，长度为4~16字符</p><br>
+        </div>
+
+        <input type="button" id="btn" value="验证">
+    </form>
+
+    <script type="text/javascript">
+        var $=function(id){
+            return document.getElementById(id);
+        }
+        var checkFlag=true;//全局校验标记，false表示有错误
+
+        window.onload = function(){
+            $("name").onfocus=nameOnFocus; 
+            $("name").onblur=nameOnBlur; 
+
+            $("pwd").onfocus=pwdOnFocus; 
+            $("pwd").onblur=pwdOnBlur; 
+
+            $("pwd-2").onfocus=pwd2OnFocus; 
+            $("pwd-2").onblur=pwd2OnBlur; 
+
+            $("email").onfocus=emailOnFocus; 
+            $("email").onblur=emailOnBlur; 
+
+            $("phone").onfocus=phoneOnFocus; 
+            $("phone").onblur=phoneOnBlur; 
+
+            $("btn").onclick=totalCheck;
+
+        }
+
+        function nameOnFocus(){
+            $("name-feedback").innerHTML="必填，长度为4~16个字符";
+            $("name-feedback").className="tip";
+        }
+
+        function nameOnBlur(){
+            if(checkName()==true)
+            {
+                $("name-feedback").className="pass";
+                $("name-feedback").innerHTML="名称可用";
+            }else{
+                $("name-feedback").className="error";
+                $("name-feedback").innerHTML="名称格式错误";
+                checkFlag=false;
+            }
+        }
+
+        function pwdOnFocus(){
+            $("pwd-feedback").innerHTML="密码长度为8~16个字符，不能为纯数字";
+            $("pwd-feedback").className="tip";
+        }
+
+        function pwdOnBlur(){
+            if(checkPwd()==true)
+            {
+                $("pwd-feedback").className="pass";
+                $("pwd-feedback").innerHTML="密码可用";
+            }else{
+                $("pwd-feedback").className="error";
+                $("pwd-feedback").innerHTML="密码格式错误";
+                checkFlag=false;
+            }
+        }
+
+        function pwd2OnFocus(){
+            $("pwd-2-feedback").innerHTML="必须与第一次输入的密码一致";
+            $("pwd-2-feedback").className="tip";
+        }
+
+        function pwd2OnBlur(){
+            if(checkPwd2()==true)
+            {
+                $("pwd-2-feedback").className="pass";
+                $("pwd-2-feedback").innerHTML="密码输入一致";
+            }else{
+                $("pwd-2-feedback").className="error";
+                $("pwd-2-feedback").innerHTML="密码输入不一致，请检查";
+                checkFlag=false;
+            }
+        }
+    
+        function emailOnFocus(){
+            $("email-feedback").innerHTML="必填，形如xxxx@xxx.xxx（x为字母或数字）";
+            $("email-feedback").className="tip";
+        }
+
+        function emailOnBlur(){
+            if(checkEmail()==true)
+            {
+                $("email-feedback").className="pass";
+                $("email-feedback").innerHTML="邮箱可用";
+            }else{
+                $("email-feedback").className="error";
+                $("email-feedback").innerHTML="邮箱格式错误";
+                checkFlag=false;
+            }
+        }
+
+        function phoneOnFocus(){
+            $("phone-feedback").innerHTML="必填，长度为11位数字";
+            $("phone-feedback").className="tip";
+        }
+
+        function phoneOnBlur(){
+            if(checkPhone()==true)
+            {
+                $("phone-feedback").className="pass";
+                $("phone-feedback").innerHTML="电话格式正确";
+            }else{
+                $("phone-feedback").className="error";
+                $("phone-feedback").innerHTML="电话格式错误";
+                checkFlag=false;
+            }
+        }
+
+        function checkName(){
+            var input=$("name").value.toString();
+            var sum=0;
+            for(var i=0;i<input.length;++i){
+                if((input.charCodeAt(i)>=0)&&(input.charCodeAt(i)<=128)){
+                    sum+=1;
+                }else{
+                    sum+=2;
+                }
+            }
+            if((sum<4)||(sum>16)){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        function checkPwd(){
+            var input=$("pwd").value.toString();
+            if(/^[0-9]+$/.test(input)==true){
+                return false;
+            }else if((input.length<8)||(input.length>16)){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        function checkPwd2(){
+            var pwd1=$("pwd").value.toString();
+            var pwd2=$("pwd-2").value.toString();
+            if((checkPwd()==true)&&(pwd1==pwd2)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function checkEmail(){
+            var input=$("email").value.toString();
+            if(/^[0-9a-zA-Z]+@[0-9a-zA-Z]+\.[0-9a-zA-Z]+$/.test(input)==true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function checkPhone(){
+            var input=$("phone").value.toString();
+            if(/^1[0-9]{10}$/.test(input)==true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function totalCheck(){
+            nameOnBlur();
+            pwdOnBlur();
+            pwd2OnBlur();
+            emailOnBlur();
+            phoneOnBlur();
+            if(checkFlag==true){
+                alert("校验通过");
+            }else{
+                alert("输入有误");
+            }
+            checkFlag=true;
+        }
+        
+    </script>
+</body>
+
+</html>

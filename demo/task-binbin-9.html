@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 09</title>
+</head>
+
+<style>/*树结构的描述使用flex布局*/
+*
+{
+    margin:0;
+    padding:0;
+}
+
+div
+{
+    margin:10px;
+    padding:10px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.item
+{
+    border:2px solid darkred;
+    background-color: lightgray;
+}
+
+div.matched
+{
+    border:2px solid darkred;
+    background-color: hotpink;
+}
+
+div.clicked
+{
+    border:2px solid darkred;
+    background-color: seagreen;
+}
+
+div.visited
+{
+    border:2px solid darkred;
+    background-color: deepskyblue;
+}
+
+</style>
+
+<body>
+    <input type="button" id="dfs" value="深度优先遍历">
+    <input type="button" id="bfs" value="广度优先遍历">
+    <input type="text" id="search-input" placeholder="输入需要进行正则匹配的值" value="">
+    <input type="button" id="dfs-search" value="深度优先搜索">
+    <input type="button" id="bfs-search" value="广度优先搜索"><br>
+    <input type="button" id="delete" value="删除节点">
+    <input type="text" id="add-input" value="" placeholder="输入需添加节点的值">
+    <input type="button" id="add" value="增加节点">
+    <div id="root" class="item">
+        学校
+        <div class="item">
+            教师
+            <div class="item">
+                语文
+                <div class="item">孙亚龙</div>
+                <div class="item">赵铁柱</div>
+                <div class="item">卢本伟</div>
+                <div class="item">卢西奥</div>
+            </div>
+            <div class="item">
+                数学
+                <div class="item">狂鼠</div>
+            </div>
+            <div class="item">
+                English
+                <div class="item">Dva</div>
+            </div>
+        </div>
+        <div class="item">
+            学生
+            <div class="item">
+                四年级
+                <div class="item">士兵76</div>
+                <div class="item">士兵77</div>
+                <div class="item">二狗子</div>
+            </div>
+            <div class="item">
+                五年级
+                <div class="item">士兵78</div>
+            </div>
+            <div class="item">
+                六年级
+                <div class="item">孙亚琴</div>
+                <div class="item">pdd</div>
+            </div>
+        </div>
+    </div>
+    <p><b>注意：</b>不要在动画结束之前进行新的操作，否则引发错误。</p>
+
+    <script>
+        !function(){
+            var root=document.getElementById("root");
+            var quene;//用于存储遍历序列的队列
+            var clickNow;//当前选中的节点
+            var clickNow_oldVal;//当前选中的节点旧值
+
+            window.onload=function(){
+                document.getElementById("dfs").onclick=DFS;
+                document.getElementById("bfs").onclick=BFS;
+                document.getElementById("dfs-search").onclick=dfsSearch;
+                document.getElementById("bfs-search").onclick=bfsSearch;
+                document.getElementById("root").onclick=selectDiv;
+                document.getElementById("delete").onclick=deleteNode;
+                document.getElementById("add").onclick=addNode;
+            };
+
+            function DFS(){//深度优先遍历
+                init();
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+                dfsNode(root);
+                renderVisit();
+
+                function dfsNode(node){
+                    if(node==undefined){
+                        return;
+                    }else{
+                        quene.push(node);
+                        var child = node.childNodes;
+                        for(var i=0;i<child.length;++i){
+                            if(child[i].nodeName.toLowerCase()=="div"){
+                                dfsNode(child[i]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            function BFS(){//广度优先遍历
+                init();
+                var visitQuene=[];
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+
+                visitQuene.push(root);
+                quene.push(root);
+                while(visitQuene.length!=0){
+                    var child=visitQuene.shift().childNodes;
+                    for(var i=0;i<child.length;++i){
+                        if(child[i].nodeName.toLowerCase()=="div"){
+                            visitQuene.push(child[i]);
+                            quene.push(child[i]);
+                        }
+                    }
+                }
+
+                renderVisit();
+            }
+
+            function dfsSearch(){//深度优先搜索
+                init();
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+                var matchReg=new RegExp(document.getElementById("search-input").value,"i");
+                dfsNode(root);
+                renderVisit();
+                document.getElementById("search-input").value="";
+
+                function dfsNode(node){
+                    if(node==undefined){
+                        return;
+                    }else{
+                        quene.push(node);
+                        var child = node.childNodes;
+                        for(var i=0;i<child.length;++i){
+                            if(child[i].nodeName.toLowerCase()=="div"){
+                                dfsNode(child[i]);
+                            }
+                            if((child[i].nodeName.toLowerCase()=="#text")&&(matchReg.test(child[i].nodeValue)==true)){
+                                node.title="matched";
+                            }
+                        }
+                    }
+                }
+            }
+
+            function bfsSearch(){//广度优先搜索
+                init();
+                var visitQuene=[];
+                var matchReg=new RegExp(document.getElementById("search-input").value,"i");
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+
+                visitQuene.push(root);
+                quene.push(root);
+                while(visitQuene.length!=0){
+                    var node=visitQuene.shift();
+                    var child=node.childNodes;
+                    for(var i=0;i<child.length;++i){
+                        if(child[i].nodeName.toLowerCase()=="div"){
+                            visitQuene.push(child[i]);
+                            quene.push(child[i]);
+                        }
+                        if((child[i].nodeName.toLowerCase()=="#text")&&(matchReg.test(child[i].nodeValue)==true)){
+                            alert("matched");
+                            node.title="matched";
+                        }
+                    }
+                }
+                document.getElementById("search-input").value="";
+                renderVisit();
+            }
+
+            function renderVisit(){//在页面上显示遍历的顺序，遍历序列已经存储在quene中
+                var count=0;
+                setTimeout(doKeyFrame,500);
+                function doKeyFrame(){
+                    if(count<=quene.length){
+                        if(count-1>=0){
+                            if(quene[count-1].className!="matched"){
+                                quene[count-1].className="item";
+                            }
+                        }
+                        if(count<quene.length){
+                            if(quene[count].title=="matched"){
+                                quene[count].className="matched";
+                            }else{
+                                quene[count].className="visited";
+                            }
+                            setTimeout(doKeyFrame,500);
+                        }
+                    }
+                    count++;
+                }
+            }
+
+            function init(){//遍历和搜索之前对节点进行初始化
+                var div=document.getElementsByTagName("div");
+                for(var i=0;i<div.length;++i){
+                    div[i].className="item";
+                    div[i].title="";
+                }
+                if(clickNow!=undefined){
+                    clickNow.className=clickNow_oldVal;
+                }
+                clickNow_oldVal=undefined;
+                clickNow=undefined;
+            }
+
+            function selectDiv(ev){//选择节点事件
+                var ev = ev || window.event;
+                var target = ev.target || ev.srcElement;
+                if(target.nodeName.toLowerCase() == 'div'){
+                    if(clickNow!=undefined){
+                        clickNow.className=clickNow_oldVal;
+                    }
+                    clickNow_oldVal=target.className;
+                    target.className="clicked";
+                    clickNow=target;
+　　　　        }
+            }
+
+            function deleteNode(){//删除节点事件
+                if(clickNow==undefined){
+                    alert("尚未选择节点！");
+                }else if(clickNow==root){
+                    alert("根节点不可以删除！");
+                }else{
+                    clickNow.innerHTML="";
+                    clickNow.parentNode.removeChild(clickNow);
+                }
+            }
+
+            function addNode(){//增加节点事件
+                if(clickNow==undefined){
+                    alert("尚未选择节点！");
+                }else{
+                    var tmp=document.createElement("div");
+                    var tmpText=document.createTextNode(document.getElementById("add-input").value);
+                    tmp.appendChild(tmpText);
+                    tmp.className="item";
+                    clickNow.appendChild(tmp);
+                }
+                document.getElementById("add-input").value="";
+            }
+
+        }();
+
+    </script>
+</body>
+</html>

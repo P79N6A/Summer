@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 06</title>
+</head>
+
+<style>/*使用flex布局*/
+body
+{
+    margin:0;
+    padding:20px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+textarea,input,div
+{
+    margin:10px;
+}
+div#display
+{
+    width:50%;
+    min-height:500px;
+    margin:20px;
+    padding:20px;
+    background-color: lightgray;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+div.label/*添加到display区域内的字符串标签延时*/
+{
+    display: flex;
+    margin:10px;
+    padding:5px;
+    background-color: deepskyblue;
+    flex-grow:0;
+    flex-shrink: 0;
+}
+div.matched/*正则匹配到的字符串样式*/
+{
+    display: flex;
+    margin:10px;
+    padding:5px;
+    background-color: hotpink;
+    flex-grow:0;
+    flex-shrink: 0;
+}
+
+div#input-bar
+{
+    margin: 0;
+    padding:20px;
+}
+
+</style>
+
+<body>
+    <div id="display"></div>
+    <div id="input-bar">
+        <textarea id="input" value="" placeholder="在此键入待处理内容" rows="15"></textarea><br>
+        <input id="input-submit" type="button" value="处理输入"><br>
+        <input  type="text" id="match" value="" placeholder="在此键入查询内容"><br>
+        <input id="ignore-case" type="checkbox" value="ignore">勾选忽略大小写<br>
+        <input id="match-submit" type="button" value="查  询">
+    </div>
+<script>
+!function(){
+    window.onload=function(){   //页面加载完成后给按钮绑定点击事件
+        document.getElementById("input-submit").onclick=handle;
+        document.getElementById("match-submit").onclick=match;
+    }
+}();
+
+function handle(){//“处理输入”按钮的click事件的处理函数
+    var input=document.getElementById("input").value;
+    var inputSplit=input.split(/[^0-9a-zA-Z\u4E00-\u9FA5]+/);//split函数用于分割字符串，分隔符选用正则表达式（任意个连续的特殊字符作为分隔符）
+    for(var i=0;i<inputSplit.length;++i){//将分割后的字符串数组中的元素逐个渲染到页面中
+        render(inputSplit[i]);
+    }
+
+}
+
+function match(){//用于字符串匹配匹配
+    var input=document.getElementById("match").value;
+    if(document.getElementById("ignore-case").checked==true){//将用户的输入转为RegExp对象，根据是否忽略大小写生成不同的对象
+        var regExp=new RegExp(input,"i");
+    }else{
+        var regExp=new RegExp(input,"");
+    }
+    var flag=false;
+    var search=document.getElementById("display").childNodes;
+    for(var iter=0;iter<search.length;++iter){//针对display区域中的字符串逐个进行正则匹配
+        if(regExp.test(search[iter].innerHTML)){
+            search[iter].className="matched";//匹配成功改变显示的样式
+            flag=true;
+        }
+    }
+    if(flag==false){    //未能匹配成功的提示
+        alert("找不到匹配的串");
+    }
+}
+
+function render(input){//该函数用于渲染节点，将分割后的字符串片段显示出来
+    var display=document.getElementById("display");
+    var newNode=document.createElement("div");
+    newNode.innerHTML=input;
+    newNode.className="label";
+    display.appendChild(newNode);
+}
+
+</script>
+</body>
+</html>

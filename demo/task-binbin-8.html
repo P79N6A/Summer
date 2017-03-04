@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 08</title>
+</head>
+
+<style>/*使用flex布局*/
+*
+{
+    margin:0;
+    padding:0;
+}
+
+div
+{
+    margin:10px;
+    padding:10px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.item
+{
+    border:2px solid darkred;
+    background-color: lightgray;
+}
+
+div.matched
+{
+    border:2px solid darkred;
+    background-color: hotpink;
+}
+
+div.selected
+{
+    border:2px solid darkred;
+    background-color: deepskyblue;
+}
+
+</style>
+
+<body>
+    <input type="button" id="dfs" value="深度优先遍历">
+    <input type="button" id="bfs" value="广度优先遍历">
+    <input type="text" id="search-input" value="">
+    <input type="button" id="dfs-search" value="深度优先搜索">
+    <input type="button" id="bfs-search" value="广度优先搜索"><br>
+    <div id="root" class="item">
+        学校
+        <div class="item">
+            教师
+            <div class="item">
+                语文
+                <div class="item">孙亚龙</div>
+                <div class="item">赵铁柱</div>
+                <div class="item">卢本伟</div>
+                <div class="item">卢西奥</div>
+            </div>
+            <div class="item">
+                数学
+                <div class="item">狂鼠</div>
+            </div>
+            <div class="item">
+                English
+                <div class="item">Dva</div>
+            </div>
+        </div>
+        <div class="item">
+            学生
+            <div class="item">
+                四年级
+                <div class="item">士兵76</div>
+                <div class="item">士兵77</div>
+                <div class="item">二狗子</div>
+            </div>
+            <div class="item">
+                五年级
+                <div class="item">士兵78</div>
+            </div>
+            <div class="item">
+                六年级
+                <div class="item">孙亚琴</div>
+                <div class="item">pdd</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        !function(){
+            var root=document.getElementById("root");
+            var quene;//用于存储遍历序列的队列
+            window.onload=function(){
+                document.getElementById("dfs").onclick=DFS;
+                document.getElementById("bfs").onclick=BFS;
+                document.getElementById("dfs-search").onclick=dfsSearch;
+                document.getElementById("bfs-search").onclick=bfsSearch;
+            };
+
+            function DFS(){//深度优先遍历
+                init();
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+                dfsNode(root);
+                displayVisit();
+
+                function dfsNode(node){
+                    if(node==undefined){
+                        return;
+                    }else{
+                        quene.push(node);
+                        var child = node.childNodes;
+                        for(var i=0;i<child.length;++i){
+                            if(child[i].nodeName.toLowerCase()=="div"){
+                                dfsNode(child[i]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            function BFS(){//广度优先遍历
+                init();
+                var visitQuene=[];
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+
+                visitQuene.push(root);
+                quene.push(root);
+                while(visitQuene.length!=0){
+                    var child=visitQuene.shift().childNodes;
+                    for(var i=0;i<child.length;++i){
+                        if(child[i].nodeName.toLowerCase()=="div"){
+                            visitQuene.push(child[i]);
+                            quene.push(child[i]);
+                        }
+                    }
+                }
+
+                displayVisit();
+            }
+
+            function dfsSearch(){//深度优先搜索
+                init();
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+                var matchReg=new RegExp(document.getElementById("search-input").value,"i");
+                dfsNode(root);
+                displayVisit();
+
+
+                function dfsNode(node){
+                    if(node==undefined){
+                        return;
+                    }else{
+                        quene.push(node);
+                        var child = node.childNodes;
+                        for(var i=0;i<child.length;++i){
+                            if(child[i].nodeName.toLowerCase()=="div"){
+                                dfsNode(child[i]);
+                            }
+                            if((child[i].nodeName.toLowerCase()=="#text")&&(matchReg.test(child[i].nodeValue)==true)){
+                                node.title="matched";
+                            }
+                        }
+                    }
+                }
+            }
+
+            function bfsSearch(){//广度优先搜索
+                init();
+                var visitQuene=[];
+                var matchReg=new RegExp(document.getElementById("search-input").value,"i");
+                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+
+                visitQuene.push(root);
+                quene.push(root);
+                while(visitQuene.length!=0){
+                    var node=visitQuene.shift();
+                    var child=node.childNodes;
+                    for(var i=0;i<child.length;++i){
+                        if(child[i].nodeName.toLowerCase()=="div"){
+                            visitQuene.push(child[i]);
+                            quene.push(child[i]);
+                        }
+                        if((child[i].nodeName.toLowerCase()=="#text")&&(matchReg.test(child[i].nodeValue)==true)){
+                            alert("matched");
+                            node.title="matched";
+                        }
+                    }
+                }
+
+                displayVisit();
+            }
+
+            function displayVisit(){//在页面上显示遍历的顺序，遍历序列已经存储在quene中
+                var count=0;
+                setTimeout(doKeyFrame,1000);
+                function doKeyFrame(){
+                    if(count<=quene.length){
+                        if(count-1>=0){
+                            if(quene[count-1].className!="matched"){
+                                quene[count-1].className="item";
+                            }
+                        }
+                        if(count<quene.length){
+                            if(quene[count].title=="matched"){
+                                quene[count].className="matched";
+                            }else{
+                                quene[count].className="selected";
+                            }
+                            setTimeout(doKeyFrame,1000);
+                        }
+                    }
+                    count++;
+                }
+            }
+
+            function init(){
+                var div=document.getElementsByTagName("div");
+                for(var i=0;i<div.length;++i){
+                    div[i].className="item";
+                    div[i].title="";
+                }
+            }
+        }();
+
+    </script>
+</body>
+</html>
