@@ -1,0 +1,135 @@
+*
+{
+    margin:0;
+    padding:0;
+}
+
+.col-flex
+{
+    display: flex;
+    flex-direction: column;
+}
+
+body
+{
+    background-image: url(../static/light.jpg);
+    justify-content: space-between;
+    align-items: center;
+    width:100vw;
+    height:100vh;
+}
+
+header
+{
+    width:100vw;
+    height:5em;
+    flex-grow:0;
+    background-color: rgba(192,192,192,0.5);
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content: space-between;
+    align-items:center;
+}
+
+h1
+{
+    color:whitesmoke;
+    padding-left:1em;
+}
+
+nav
+{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content: center;
+    align-items:center;
+}
+
+nav span
+{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content: center;
+    align-items:flex-start;
+    padding-top:2em;
+    color:white;
+    box-sizing: border-box;
+    width:8em;
+    height:5em;
+    background-color:rgba(192,192,192,0);
+}
+
+nav span:hover
+{
+    background-color:rgba(192,192,192,0.5);
+    border-bottom:3px solid
+}
+
+.main
+{
+    background-color:rgba(192,192,192,0.5);
+    flex-grow:0;
+    width:75vw;
+    height:75vh;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.main h2
+{
+    width:100%;
+    height:10%;
+    color:whitesmoke;
+    justify-content:center;
+    align-items:center;
+    background-color:rgba(192,192,192,0.7);
+}
+
+.demo-container
+{
+    width:100%;
+    height:90%;
+    justify-content: flex-start;
+    align-items: center;
+    overflow:auto;
+}
+
+.demo-container a
+{
+    background-color:rgba(51,255,255,0.2);
+    color:whitesmoke;
+    box-sizing:border-box;
+    width:92%;
+    height:10%;
+    margin-top:15px;
+    padding-left:15px;
+    font-size: 1.25em;
+    text-decoration: none;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items:center;
+}
+
+.demo-container a:hover
+{
+    background-color:deepskyblue;  
+}
+
+footer
+{
+    background-color:rgba(192,192,192,0.5);
+    width:100vw;
+    height:2em;
+    flex-grow:0;
+    justify-content: center;
+    align-items: center;
+}
+
+footer span
+{
+    color:whitesmoke;
+}

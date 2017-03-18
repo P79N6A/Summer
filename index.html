@@ -4,17 +4,35 @@
 <head>
   <title>盛广智的主页</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css/resume.css"> 
+  <link rel="stylesheet" type="text/css" href="./css/index.css"> 
 </head>
 
-<body>
-即将跳转到简历，请稍后...
-</body>
+<body class="col-flex">
+  <header>
+    <h1>个人主页</h1>
+    <nav>
+      <span>基本信息</span>
+      <span>项目Demo</span>
+      <span>了解更多</span>
+    </nav>
+  </header>
+  <div class="main col-flex">
+    <h2 class="col-flex">前端Demo</h2>
+    <div class="demo-container col-flex">
+      <a class="demo-item" href="./demo/myresume.html" target="_blank">1. 个人简历（静态页面）</a> 
+      <a class="demo-item" href="./demo/task-xiaowei-7-flex.html" target="_blank">2. 页面重构——新世界官网（flex布局）</a>
+      <a class="demo-item" href="./demo/task-xiaowei-7.html" target="_blank">3. 页面重构——新世界官网（传统布局）</a>
+      <a class="demo-item" href="./demo/task-binbin-9.html" target="_blank">4. JavaScript与DOM操作——树的遍历/查找/插入/删除</a>
+      <a class="demo-item" href="./demo/task-yaoyao-6.html" target="_blank">5. 封装组件（单例模式）——浮出层</a>
+      <a class="demo-item" href="./demo/task-yaoyao-7.html" target="_blank">6. 封装组件——可排序表格</a>
+    </div>
+  </div>
+  <footer class="col-flex">
+    <span>夏木与晴空&copy;</span>
+  </footer>
+<script src="//cdn.bootcss.com/vue/1.0.24/vue.js"></script>
 <script>
-window.onload=function(){
-  window.open("https://shengguangzhi.github.io/ResumeDemo/demo/myresume.html","_self");
-}
-
+  //这里插入vue代码
 </script>
-
+</body>
 </html>

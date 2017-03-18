@@ -1,0 +1,44 @@
+        table
+        {
+            border:none;
+            border-collapse: collapse;
+        }
+        table,
+        tr,
+        td,
+        th {
+            padding: 0.25em;
+            text-align: center;
+        }
+        th
+        {
+            border-top:1px solid black;
+            border-bottom:1px solid black;
+        }
+
+        .table-head {
+            background-color: gray;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: normal;
+        }
+
+        .sortable-col {
+            color: yellow;
+            cursor:pointer;
+        }
+
+        .sortable-col:hover {
+            background-color: darkslategray;
+        }
+
+        .table-item-even {
+            background-color: lightgray;
+        }
+
+        .table-item-odd {
+            background-color: darkgray;
+        }
+
+        tr:hover {
+            background-color: palevioletred;
+        }

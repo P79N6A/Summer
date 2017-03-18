@@ -1,8 +1,9 @@
-function SortableTable(element,data,tableHead,index){
+function SortableTable(element,data,tableHead,index,style){
     this.element=element;
     this.data=data;
     this.tableHead=tableHead;
     this.index=index;
+    this.style=style;
     this.sortFlag="inc";//inc表示升序，dec表示降序
 }
 
@@ -59,9 +60,9 @@ SortableTable.prototype.render=function(){
         var th=document.createElement("th");
         th.innerHTML=tableHead[i];
         if(this.index.indexOf(this.tableHead[i])!=-1){
-            th.classList.add("sortable-col");
+            th.classList.add(that.style.sortableColumn);
         }
-        th.classList.add("table-head");
+        th.classList.add(that.style.tableHead);
         tr.appendChild(th);
     }
 
@@ -75,9 +76,9 @@ SortableTable.prototype.render=function(){
         }
 
         if(i%2==0){
-            tr.className="table-item-even";
+            tr.className=that.style.tableRowEven;
         }else{
-            tr.className="table-item-odd";
+            tr.className=that.style.tableRowOdd;
         }
         table.appendChild(tr);
     }
