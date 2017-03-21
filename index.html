@@ -7,32 +7,61 @@
   <link rel="stylesheet" type="text/css" href="./css/index.css"> 
 </head>
 
-<body class="col-flex">
-  <header>
-    <h1>个人主页</h1>
-    <nav>
-      <span>基本信息</span>
-      <span>项目Demo</span>
-      <span>了解更多</span>
-    </nav>
-  </header>
-  <div class="main col-flex">
-    <h2 class="col-flex">前端Demo</h2>
-    <div class="demo-container col-flex">
-      <a class="demo-item" href="./demo/myresume.html" target="_blank">1. 个人简历（静态页面）</a> 
-      <a class="demo-item" href="./demo/task-xiaowei-7-flex.html" target="_blank">2. 页面重构——新世界官网（flex布局）</a>
-      <a class="demo-item" href="./demo/task-xiaowei-7.html" target="_blank">3. 页面重构——新世界官网（传统布局）</a>
-      <a class="demo-item" href="./demo/task-binbin-9.html" target="_blank">4. JavaScript与DOM操作——树的遍历/查找/插入/删除</a>
-      <a class="demo-item" href="./demo/task-yaoyao-6.html" target="_blank">5. 封装组件（单例模式）——浮出层</a>
-      <a class="demo-item" href="./demo/task-yaoyao-7.html" target="_blank">6. 封装组件——可排序表格</a>
+<body>
+  <div id="page"  class="col-flex">
+    <header>
+      <h1>Code Artist</h1>
+      <nav>
+        <span>基本信息</span>
+        <span>项目Demo</span>
+        <span>了解更多</span>
+      </nav>
+    </header>
+    <div class="main col-flex">
+      <h2 class="col-flex">前端Demo</h2>
+      <div class="demo-container col-flex">
+        <a class="demo-item" v-for="demo in demos" :href="demo.href" :target="demo.target">{{ demo.title }}</a> 
+      </div>
     </div>
+    <footer class="col-flex">
+      <span>夏木与晴空&copy;</span>
+    </footer>
   </div>
-  <footer class="col-flex">
-    <span>夏木与晴空&copy;</span>
-  </footer>
-<script src="//cdn.bootcss.com/vue/1.0.24/vue.js"></script>
+<script src="http://cdn.bootcss.com/vue/1.0.24/vue.js"></script>
 <script>
-  //这里插入vue代码
+  var vm=new Vue({
+    el:"#page",
+    data:{
+      greeting:"游客",
+      demos:[{
+        href:"./demo/myresume.html",
+        target:"_blank",
+        title:"1. 个人简历（静态页面）"
+      },{
+        href:"./demo/task-xiaowei-7-flex.html",
+        target:"_blank",
+        title:"2. 页面重构——新世界官网（flex布局）"
+      },{
+        href:"./demo/task-xiaowei-7.html",
+        target:"_blank",
+        title:"3. 页面重构——新世界官网（传统布局）"
+      },{
+        href:"./demo/task-binbin-9.html",
+        target:"_blank",
+        title:"4. JavaScript与DOM操作——树的遍历/查找/插入/删除"
+      },{
+        href:"./demo/task-yaoyao-6.html",
+        target:"_blank",
+        title:"5. 封装组件（单例模式）——浮出层"
+      },{
+        href:"./demo/task-yaoyao-7.html",
+        target:"_blank",
+        title:"6. 封装组件——可排序表格"
+      }
+      ],
+    },
+    methods:{}
+  });
 </script>
 </body>
 </html>
