@@ -6,94 +6,93 @@
     <title>IFE JavaScript YaoYao Task 03</title>
 </head>
 <style>
-    *
-    {
-        margin:0;
-        padding:0;
+    * {
+        margin: 0;
+        padding: 0;
     }
-
 </style>
+
 <body>
     <form>
-    <label><input type="radio" id="in-school-radio" name="in-school" value="in-school" checked>在校生</label>
-    <label><input type="radio" id="not-in-school-radio" name="in-school" value="not-in-school">非在校生</label>
-    <div id="in">
-        <span>学校</span>
-        <select id="city"></select>
-        <select id="university"></select>
-    </div>
-    <div id="not-in">
-        <span>就业单位</span>
-        <input type="text" id="no-in-input" value="">
-    </div>
+        <label><input type="radio" id="in-school-radio" name="in-school" value="in-school" checked>在校生</label>
+        <label><input type="radio" id="not-in-school-radio" name="in-school" value="not-in-school">非在校生</label>
+        <div id="in">
+            <span>学校</span>
+            <select id="city"></select>
+            <select id="university"></select>
+        </div>
+        <div id="not-in">
+            <span>就业单位</span>
+            <input type="text" id="no-in-input" value="">
+        </div>
     </form>
 
     <script type="text/javascript">
-        !function(){
-            var $=function(id){
+        !function () {
+            var $ = function (id) {
                 return document.getElementById(id);
             }
-            var city=new Array("北京","上海","武汉");
-            var school=[["北京大学","清华大学","中国人民大学"],["复旦大学","上海交通大学","华东理工大学"],["武汉大学","华中科技大学","武汉理工大学"]];
-            var Flag=true;//全局标记，true表示在校生，false表示非在校生
+            var city = new Array("北京", "上海", "武汉");
+            var school = [["北京大学", "清华大学", "中国人民大学"], ["复旦大学", "上海交通大学", "华东理工大学"], ["武汉大学", "华中科技大学", "武汉理工大学"]];
+            var Flag = true;//全局标记，true表示在校生，false表示非在校生
 
-            window.onload=function(){
-                $("in-school-radio").onclick=function(){
-                    $("in").style.display="block";
-                    $("not-in").style.display="none";
-                    Flag=true;
+            window.onload = function () {
+                $("in-school-radio").onclick = function () {
+                    $("in").style.display = "block";
+                    $("not-in").style.display = "none";
+                    Flag = true;
                 }
-                $("not-in-school-radio").onclick=function(){
-                    $("in").style.display="none";
-                    $("not-in").style.display="block";
-                    Flag=false;
+                $("not-in-school-radio").onclick = function () {
+                    $("in").style.display = "none";
+                    $("not-in").style.display = "block";
+                    Flag = false;
                 }
-                $("city").onchange=changeCity;
+                $("city").onchange = changeCity;
                 init();
             }
 
-            function init(){
-                $("in").style.display="true";
-                $("not-in").style.display="none";
-                Flag=true;
-                render(city,school,2);
+            function init() {
+                $("in").style.display = "true";
+                $("not-in").style.display = "none";
+                Flag = true;
+                render(city, school, 2);
 
             }
 
-            function render(city,school,index){
+            function render(city, school, index) {
                 var i;
-                $("city").innerHTML="";
-                $("university").innerHTML="";
-                for(i=0;i<city.length;++i){
-                    var newOp=document.createElement("option");
-                    newOp.innerHTML=city[i];
-                    newOp.value=city[i];
+                $("city").innerHTML = "";
+                $("university").innerHTML = "";
+                for (i = 0; i < city.length; ++i) {
+                    var newOp = document.createElement("option");
+                    newOp.innerHTML = city[i];
+                    newOp.value = city[i];
                     $("city").appendChild(newOp);
-                    if(i==index){
-                        newOp.selected=true;
+                    if (i == index) {
+                        newOp.selected = true;
                     }
 
                 }
-                for(i=0;i<school[index].length;++i){
-                    var newOp=document.createElement("option");
-                    newOp.innerHTML=school[index][i];
-                    newOp.value=school[index][i];
+                for (i = 0; i < school[index].length; ++i) {
+                    var newOp = document.createElement("option");
+                    newOp.innerHTML = school[index][i];
+                    newOp.value = school[index][i];
                     $("university").appendChild(newOp);
-                    if(i==0){
-                        newOp.selected=true;
+                    if (i == 0) {
+                        newOp.selected = true;
                     }
                 }
             }
 
-            function changeCity(){
+            function changeCity() {
                 var value;
-                var selectNodes=$("city").childNodes;
-                for(var i=0;i<selectNodes.length;++i){
-                    if(selectNodes[i].selected==true){
-                        value=selectNodes[i].value;
+                var selectNodes = $("city").childNodes;
+                for (var i = 0; i < selectNodes.length; ++i) {
+                    if (selectNodes[i].selected == true) {
+                        value = selectNodes[i].value;
                     }
                 }
-                render(city,school,city.indexOf(value));
+                render(city, school, city.indexOf(value));
             }
 
         }();

@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>IFE JavaScript YaoYao Task 01</title>
+    <meta charset="utf-8">
+    <title>IFE JavaScript YaoYao Task 01</title>
 </head>
 <style>
-input#input
-{
-border:1px solid lightgray;
-border-radius: 4px;
-width:200px;
-height:30px;
-}
-input#btn
-{
-background-color: dodgerblue;
-color:white;
-width:50px;
-height:30px;
-border-radius:5px;
-border:none;
-}
-p#feedback.error
-{
-color:red;
-}
-p#feedback.pass
-{
-color:green;
-}
+    input#input {
+        border: 1px solid lightgray;
+        border-radius: 4px;
+        width: 200px;
+        height: 30px;
+    }
+    
+    input#btn {
+        background-color: dodgerblue;
+        color: white;
+        width: 50px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+    }
+    
+    p#feedback.error {
+        color: red;
+    }
+    
+    p#feedback.pass {
+        color: green;
+    }
 </style>
+
 <body>
     <label> 名称 <input type="text" id="input" value=""></label>
-    <input type="button" id="btn" value="验证"  onclick="check()">
+    <input type="button" id="btn" value="验证" onclick="check()">
     <p id="feedback">必填，长度为4~16字符</p>
-<script type="text/javascript">
-function check(){
-    var input=document.getElementById("input").value.toString();
-    var sum=0;
-    for(var i=0;i<input.length;++i){
-        if((input.charCodeAt(i)>=0)&&(input.charCodeAt(i)<=128)){
-            sum+=1;
-        }else{
-            sum+=2;
+    <script type="text/javascript">
+        function check() {
+            var input = document.getElementById("input").value.toString();
+            var sum = 0;
+            for (var i = 0; i < input.length; ++i) {
+                if ((input.charCodeAt(i) >= 0) && (input.charCodeAt(i) <= 128)) {
+                    sum += 1;
+                } else {
+                    sum += 2;
+                }
+            }
+            if ((sum < 4) || (sum > 16)) {
+                checkError();
+            } else {
+                checkPass();
+            }
+
+            function checkError() {
+                var feedback = document.getElementById("feedback");
+                feedback.innerHTML = "输入格式有误，验证不通过";
+                feedback.className = "error";
+            }
+
+            function checkPass() {
+                var feedback = document.getElementById("feedback");
+                feedback.innerHTML = "验证通过";
+                feedback.className = "pass";
+            }
         }
-    }
-    if((sum<4)||(sum>16)){
-        checkError();
-    }else{
-        checkPass();
-    }
 
-    function checkError(){
-        var feedback=document.getElementById("feedback");
-        feedback.innerHTML="输入格式有误，验证不通过";
-        feedback.className="error";
-    }  
-
-    function checkPass(){
-        var feedback=document.getElementById("feedback");
-        feedback.innerHTML="验证通过";
-        feedback.className="pass";
-    }
-}
-</script>
+    </script>
 </body>
-</html>
 
+</html>

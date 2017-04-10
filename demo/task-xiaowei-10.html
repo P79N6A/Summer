@@ -2,55 +2,87 @@
 <html>
 
 <head>
-<title>Flex布局</title>
-<meta charset="utf-8">
-<style>
-body
-{
-  margin:0;
-  padding:0;
-}
-
-div#container
-{
-  margin:0;
-  padding:20px;
-  display:flex;
-  flex-direction: row;
-  flex-wrap:wrap;
-  align-content: space-between;
-}
-
-div#box1 { box-sizing:border-box;margin:20px 0;width:150px; height:120px; border: 1px solid #f00;}
-
-div#box2 { box-sizing:border-box; margin:20px 0;width:150px; height: 100px; border: 1px solid #f00; }
-
-div#box3 { box-sizing:border-box; margin:20px 0;width:150px; height:40px; border: 1px solid #f00; }
-
-div#box4 { box-sizing:border-box; margin:20px 0;width:150px; height:200px;border: 1px solid #00f; }
-
-@media all and (min-width: 640px)/*针对大屏幕设备（宽度大于640px）的样式*/
-{
-div#container
-{
-  justify-content:space-between;
-  align-items:center;
-}
-}
-
-@media all and (max-width: 640px)/*针对小屏幕设备（宽度小于640px）的样式*/
-{
-    div#container
-    {
-        justify-content:space-between;
-        align-items:flex-start;
+  <title>Flex布局</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
     }
-    div#box1 { order:2; }
-    div#box2 { order:3; }
-    div#box3 { order:4; }
-    div#box4 { order:1;}
-}
-</style>
+    
+    div#container {
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: space-between;
+    }
+    
+    div#box1 {
+      box-sizing: border-box;
+      margin: 20px 0;
+      width: 150px;
+      height: 120px;
+      border: 1px solid #f00;
+    }
+    
+    div#box2 {
+      box-sizing: border-box;
+      margin: 20px 0;
+      width: 150px;
+      height: 100px;
+      border: 1px solid #f00;
+    }
+    
+    div#box3 {
+      box-sizing: border-box;
+      margin: 20px 0;
+      width: 150px;
+      height: 40px;
+      border: 1px solid #f00;
+    }
+    
+    div#box4 {
+      box-sizing: border-box;
+      margin: 20px 0;
+      width: 150px;
+      height: 200px;
+      border: 1px solid #00f;
+    }
+    
+    @media all and (min-width: 640px)
+    /*针对大屏幕设备（宽度大于640px）的样式*/
+    
+    {
+      div#container {
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    
+    @media all and (max-width: 640px)
+    /*针对小屏幕设备（宽度小于640px）的样式*/
+    
+    {
+      div#container {
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      div#box1 {
+        order: 2;
+      }
+      div#box2 {
+        order: 3;
+      }
+      div#box3 {
+        order: 4;
+      }
+      div#box4 {
+        order: 1;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -61,4 +93,5 @@ div#container
     <div id="box4"></div>
   </div>
 </body>
+
 </html>

@@ -20,48 +20,46 @@
     **** 建议不使用任何第三方库、框架 ****
 -->
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 07</title>
 </head>
 
-<style>/*使用flex布局*/
-*
-{
-    margin:0;
-    padding:0;
-}
-
-div#root
-{
-    width:1000px;
-    height:400px;
-}
-
-div.item
-{
-    width:40%;
-    height:80%;
-    display:flex;
-    flex-wrap:nowrap;
-    justify-content: space-around;
-    align-items:center;
-    border:2px solid darkred;
-    background-color: lightgray;
-}
-
-div.selected
-{
-    width:40%;
-    height:80%;
-    display:flex;
-    flex-wrap:nowrap;
-    justify-content: space-around;
-    align-items:center;
-    border:2px solid darkred;
-    background-color: deepskyblue;
-}
-
+<style>
+    /*使用flex布局*/
+    
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    div#root {
+        width: 1000px;
+        height: 400px;
+    }
+    
+    div.item {
+        width: 40%;
+        height: 80%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        border: 2px solid darkred;
+        background-color: lightgray;
+    }
+    
+    div.selected {
+        width: 40%;
+        height: 80%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        border: 2px solid darkred;
+        background-color: deepskyblue;
+    }
 </style>
 
 <body>
@@ -92,26 +90,26 @@ div.selected
     </div>
 
     <script>
-        !function(){
-            var root=document.getElementById("root");
+        !function () {
+            var root = document.getElementById("root");
             var quene;//用于存储遍历序列的队列
-            window.onload=function(){
-                document.getElementById("pre-order").onclick=preOrder;
-                document.getElementById("mid-order").onclick=midOrder;
-                document.getElementById("pro-order").onclick=proOrder;
+            window.onload = function () {
+                document.getElementById("pre-order").onclick = preOrder;
+                document.getElementById("mid-order").onclick = midOrder;
+                document.getElementById("pro-order").onclick = proOrder;
             };
 
-            function preOrder(){//前序遍历
-                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+            function preOrder() {//前序遍历
+                quene = new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
                 preOrderVisit(root);
                 displayVisit();
 
-                function preOrderVisit(node){
-                    if(node==undefined){
+                function preOrderVisit(node) {
+                    if (node == undefined) {
                         return;
-                    }else{
-                        var lChild=node.firstElementChild;
-                        var rChild=node.lastElementChild;
+                    } else {
+                        var lChild = node.firstElementChild;
+                        var rChild = node.lastElementChild;
                         quene.push(node);
                         preOrderVisit(lChild);
                         preOrderVisit(rChild);
@@ -119,17 +117,17 @@ div.selected
                 }
             }
 
-            function midOrder(node){//中序遍历
-                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+            function midOrder(node) {//中序遍历
+                quene = new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
                 midOrderVisit(root);
                 displayVisit();
 
-                function midOrderVisit(node){
-                    if(node==undefined){
+                function midOrderVisit(node) {
+                    if (node == undefined) {
                         return;
-                    }else{
-                        var lChild=node.firstElementChild;
-                        var rChild=node.lastElementChild;
+                    } else {
+                        var lChild = node.firstElementChild;
+                        var rChild = node.lastElementChild;
                         midOrderVisit(lChild);
                         quene.push(node);
                         midOrderVisit(rChild);
@@ -137,17 +135,17 @@ div.selected
                 }
             }
 
-            function proOrder(node){//后序遍历
-                quene=new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
+            function proOrder(node) {//后序遍历
+                quene = new Array();//用一个队列来存储遍历的顺序，然后用队列复现遍历顺序
                 proOrderVisit(root);
                 displayVisit();
 
-                function proOrderVisit(node){
-                    if(node==undefined){
+                function proOrderVisit(node) {
+                    if (node == undefined) {
                         return;
-                    }else{
-                        var lChild=node.firstElementChild;
-                        var rChild=node.lastElementChild;
+                    } else {
+                        var lChild = node.firstElementChild;
+                        var rChild = node.lastElementChild;
                         proOrderVisit(lChild);
                         proOrderVisit(rChild);
                         quene.push(node);
@@ -155,25 +153,25 @@ div.selected
                 }
             }
 
-            function displayVisit(){//在页面上显示遍历的顺序，遍历序列已经存储在quene中
+            function displayVisit() {//在页面上显示遍历的顺序，遍历序列已经存储在quene中
                 alert(quene[0].id);
-                var count=0;
-                setTimeout(doKeyFrame,1000);
-                function doKeyFrame(){
-                    if(count<=quene.length){
-                        if(count-1>=0){
-                            quene[count-1].className="item";
+                var count = 0;
+                setTimeout(doKeyFrame, 1000);
+                function doKeyFrame() {
+                    if (count <= quene.length) {
+                        if (count - 1 >= 0) {
+                            quene[count - 1].className = "item";
                         }
-                        if(count<quene.length){
-                            quene[count].className="selected";
-                            setTimeout(doKeyFrame,1000);
+                        if (count < quene.length) {
+                            quene[count].className = "selected";
+                            setTimeout(doKeyFrame, 1000);
                         }
                     }
                     count++;
                 }
             }
         }();
-
     </script>
 </body>
+
 </html>

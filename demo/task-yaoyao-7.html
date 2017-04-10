@@ -13,18 +13,17 @@
 
     <script type="text/javascript" src="../bin/task-yaoyao-7/SortableTable.js"></script>
     <script>
-
         var tableHead = ["学号", "数据结构", "操作系统", "算法导论", "编译原理", "总成绩"];
         var data = generateData();
-        var index = ["数据结构", "学号","总成绩"];//排序的索引，对应表头中的下标
+        var index = ["数据结构", "学号", "总成绩"];//排序的索引，对应表头中的下标
         var style = {
-            tableHead:"table-head",
-            sortableColumn:"sortable-col",
-            tableRowOdd:"table-item-odd",
-            tableRowEven:"table-item-even"
+            tableHead: "table-head",
+            sortableColumn: "sortable-col",
+            tableRowOdd: "table-item-odd",
+            tableRowEven: "table-item-even"
         };
 
-        var table = new SortableTable(document.getElementById("table"), data, tableHead, index,style);
+        var table = new SortableTable(document.getElementById("table"), data, tableHead, index, style);
         table.render();
 
         function generateData() {//随机生成一组学生成绩用作示例
@@ -33,7 +32,7 @@
                 var sum = 0;
                 var item = [i + 1];
                 for (var j = 0; j < 4; ++j) {
-                    var rand = 40+Math.round(Math.random() * 60);
+                    var rand = 40 + Math.round(Math.random() * 60);
                     sum = sum + rand;
                     item.push(rand);
                 }
