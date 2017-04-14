@@ -10,7 +10,7 @@
 <body>
   <div id="page"  class="col-flex">
     <header>
-      <h1>Code Artist</h1>
+      <h1>盛广智的主页</h1>
       <nav>
         <span>基本信息</span>
         <span>项目Demo</span>
@@ -27,36 +27,40 @@
       <span>夏木与晴空&copy;</span>
     </footer>
   </div>
-<script src="http://cdn.bootcss.com/vue/1.0.24/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue/1.0.24/vue.js"></script>
 <script>
   var vm=new Vue({
     el:"#page",
     data:{
       greeting:"游客",
       demos:[{
+        href:"http://182.254.133.221/",
+        target:"_blank",
+        title:"1. 基于vue和nodejs的旅行路线规划助手"
+      },{
         href:"./demo/myresume.html",
         target:"_blank",
-        title:"1. 个人简历（静态页面）"
+        title:"2. 个人简历（静态页面）"
       },{
         href:"./demo/task-xiaowei-7-flex.html",
         target:"_blank",
-        title:"2. 页面重构——新世界官网（flex布局）"
+        title:"3. 页面重构——新世界官网（flex布局）"
       },{
         href:"./demo/task-xiaowei-7.html",
         target:"_blank",
-        title:"3. 页面重构——新世界官网（传统布局）"
+        title:"4. 页面重构——新世界官网（传统布局）"
       },{
         href:"./demo/task-binbin-9.html",
         target:"_blank",
-        title:"4. JavaScript与DOM操作——树的遍历/查找/插入/删除"
+        title:"5. JavaScript与DOM操作——树的遍历/查找/插入/删除"
       },{
         href:"./demo/task-yaoyao-6.html",
         target:"_blank",
-        title:"5. 封装组件（单例模式）——浮出层"
+        title:"6. 封装组件（单例模式）——浮出层"
       },{
         href:"./demo/task-yaoyao-7.html",
         target:"_blank",
-        title:"6. 封装组件——可排序表格"
+        title:"7. 封装组件——可排序表格"
       }
       ],
     },
