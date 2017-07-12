@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>What to eat ?</title>
+    <style>
+    * 
+    {
+        margin:0;
+        padding:0;
+    }
+    .container,.welcome,.makesure,.result
+    {
+        width:100%;
+        height:100vh;
+        min-height:100vh;
+    }
+    img
+    {
+        height:60vw;
+        width:60vw;
+    }
+    .flex
+    {
+        display:flex;
+        flex-direction: column;
+        flex-wrap:nowrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .btn
+    {
+        width:80vw;
+        height:7vh;
+        color:white;
+        background-color: green;
+        border-radius:1.5vh;
+    }
+    .btn:active
+    {
+        background-color:lightgreen;
+    }
+    .br
+    {
+        color:lightcoral;
+        font-size:3em;
+    }
+    .pr
+    {
+        color:purple;
+        font-size:3em;
+    }
+
+
+
+    </style>
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container flex">
+            <div class="welcome flex">
+                <img src="../static/rotate.gif">
+                <span class="pr">去哪儿呢 ?</span>
+            </div>
+            <div class="makesure flex">
+                <img class="warning" src="../static/warning.gif">
+                <a class="sure-btn btn flex">千万别点！</a>
+            </div>
+            <div class="result flex">
+                <img src="../static/result.jpg">
+                <span>逗你玩呢，就是这家 :-)</span>
+                <span id="name"></span>
+                <a class="retry-btn btn flex">不服再来啊！</a>
+            </div>    
+        </div>
+        <script>
+        var welcome=$(".welcome");
+        var makesure=$(".makesure");
+        var surebtn=$(".sure-btn");
+        var result=$(".result");
+        var retrybtn=$(".retry-btn");
+        
+        var restaurant=["麦当劳","永和大王","牛肉饭","通心粉","肉夹馍"]; 
+
+        surebtn.on("click",select);
+        retrybtn.on("click",init);
+
+        function init(){
+            welcome.hide();
+            makesure.hide();
+            result.hide();
+            welcome.fadeIn(2000).fadeOut(2000,function(){
+                makesure.fadeIn(2000);
+            });
+        }
+
+        function select(){
+            makesure.fadeOut(1000,function(){
+                var index=Math.floor(restaurant.length*Math.random());
+                $("#name").text(restaurant[index]).addClass("br");
+                result.fadeIn(2000);
+            });
+        } 
+
+        init();
+
+        </script>
+    </body>
+</html>
