@@ -35,6 +35,7 @@
         color:white;
         background-color: green;
         border-radius:1.5vh;
+        font-size:3em;
     }
     .btn:active
     {
@@ -43,7 +44,7 @@
     .br
     {
         color:lightcoral;
-        font-size:3em;
+        font-size:5em;
     }
     .pr
     {
@@ -54,13 +55,13 @@
 
 
     </style>
-    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container flex">
             <div class="welcome flex">
                 <img src="../static/rotate.gif">
-                <span class="pr">去哪儿呢 ?</span>
+                <span class="pr" style="font-size:3em">去哪儿呢 ?</span>
             </div>
             <div class="makesure flex">
                 <img class="warning" src="../static/warning.gif">
@@ -68,7 +69,7 @@
             </div>
             <div class="result flex">
                 <img src="../static/result.jpg">
-                <span>逗你玩呢，就是这家 :-)</span>
+                <span style="font-size:3em">逗你玩呢，就是这家 :-)</span>
                 <span id="name"></span>
                 <a class="retry-btn btn flex">不服再来啊！</a>
             </div>    
@@ -80,7 +81,7 @@
         var result=$(".result");
         var retrybtn=$(".retry-btn");
         
-        var restaurant=["麦当劳","永和大王","牛肉饭","通心粉","肉夹馍"]; 
+        var restaurant=["韩伊拌饭","永和大王","牛肉饭","通心粉","饺子"]; 
 
         surebtn.on("click",select);
         retrybtn.on("click",init);
