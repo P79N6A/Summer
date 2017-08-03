@@ -1,26 +1,46 @@
 var config = require('./sModule.config.js');
+var fs = require('fs');
 
 function sModule(){
-    //
+    this.source = {};
+    this.source.length = 0;
+
 }
 
 var _proto = sModule.prototype;
 
-// 检查输入输出路径是否正常，以及入口文件是否存在
+// 检查输入输出路径是否正常，并读取文件，保存为特定对象
 _proto.checkIO = function () {
     console.log('Checkout IO !');
+    var _this = this;
+    var dirPath = config.appConfig.input.path;
+    fs.readdir(dirPath,function (err, files) {
+        if (err){
+           throw err;
+        } else {
+            files.forEach(function (file) {
+                fs.readFile(dirPath+ '/' +file, 'utf-8', function (err, data) {
+                    if (err) {
+                        throw err;
+                    }
+                    var indexKey =  _this.source.length;
+                    var fileData = {
+                        // 可能还要补充其它的数据
+                        data: data
+                    };
+                    _this.source[String(indexKey)] = fileData;
+                    _this.source.length++;
+                });
+            });
+        }
+    });
     return this;
 };
 
 // 初始化打包工具实例，完成配置和一些中间状态的生成
 _proto.initInstance = function () {
     console.log('Init instance !');
-    return this;
-};
-
- // 读取输入文件，并保存为特定的对象
-_proto.readInput = function () {
-    console.log('Read Input !');
+    console.log(JSON.stringify(this.source));
     return this;
 };
 
@@ -39,6 +59,5 @@ _proto.generateApp = function () {
 new sModule(config)
     .checkIO()
     .initInstance()
-    .readInput()
     .compileApp()
     .generateApp();
