@@ -41,10 +41,12 @@ class Select extends Component{
     };
 
     addNew (event) {
-        this.setState({
-            text:'',
-            list:this.state.list.concat(this.state.text)
-        });
+        if(this.state.text!==''){
+            this.setState({
+                text:'',
+                list:this.state.list.concat(this.state.text)
+            });   
+        }
     };
 
     save () {
