@@ -30,7 +30,7 @@ class Select extends Component{
     deleteItem (item) {
         var list=this.state.list;
         this.setState({
-            list:list.slice(0,list.indexOf(item)).concat(list.slice(indexOf(item)+1,list.length))
+            list:list.slice(0,list.indexOf(item)).concat(list.slice(list.indexOf(item)+1,list.length))
         });
     };
 
