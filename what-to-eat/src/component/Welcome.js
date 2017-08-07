@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import { Spin } from 'antd';
-
 import 'antd/dist/antd.css';
 
 class Welcome extends Component{
@@ -16,9 +15,9 @@ class Welcome extends Component{
     
     render () {
         return (
-            <div className="spin-container">
+            <div>
                 <Spin size="large" />
-                <div className="hint">来一次紧张赤鸡的Roll？</div>
+                <div>来一次紧张赤鸡的Roll？</div>
             </div>
         );
     }

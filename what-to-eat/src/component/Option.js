@@ -57,7 +57,7 @@ class Select extends Component{
 
     render () {
         return (
-            <Card title="在这里进行修改..."  style={{ width: 300 }}>
+            <Card  title="在这里进行修改...">
                 <div>
                     {this.state.list.map(item => {return <Tag closable onClose={()=>{this.deleteItem(item)}} color="pink" key={item}>{item}</Tag>;})}
                 </div>

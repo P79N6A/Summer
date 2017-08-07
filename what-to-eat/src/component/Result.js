@@ -10,6 +10,7 @@ class Result extends Component{
         this.state ={
             name: null
         };
+        this.style={};
     };
 
     componentDidMount () {
@@ -22,9 +23,9 @@ class Result extends Component{
 
     render () {
         return (
-            <Card title="最后结果为..."  style={{ width: 300 }}>
-                <Tag color="green">{this.state.name}</Tag>
-                <Button type="dashed" onClick = {this.props.rollAgain} >要不，还是换一家吧😓</Button>
+            <Card style={this.style.card} title="最后结果为...">
+                <Tag style={this.style.tag} color="green">{this.state.name}</Tag>
+                <Button type="dashed" style={this.style.btn} onClick = {this.props.rollAgain} >要不，还是换一家吧😓</Button>
             </Card>
         );
     }

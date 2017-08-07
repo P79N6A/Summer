@@ -37,7 +37,7 @@ class Select extends Component{
         }
         if(this.state.isSup) {
             return (
-                <Card title="这些是已选的..."  style={{ width: 300 }}>
+                <Card  title="这些是已选的...">
                     <div>
                         {this.state.list.map(item => {return <Tag color="pink" key={item}>{item}</Tag>;})}
                     </div>
