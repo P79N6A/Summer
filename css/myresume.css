@@ -237,6 +237,16 @@ h1
 
 .edu-info
 {
+    margin-bottom:2em;
+    display:flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:flex-start; 
+}
+
+.work-info
+{
     margin-bottom:1em;
     display:flex;
     flex-direction:column;
@@ -257,7 +267,7 @@ h1
 
 .project-info-item
 {
-    padding:1em 0 2em 0;
+    padding:1em 0 1em 0;
     display:flex;
     flex-direction:column;
     flex-wrap: nowrap;
@@ -266,6 +276,16 @@ h1
 }
 
 .edu-info-item
+{
+    margin-top:2em;
+    display:flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:flex-start; 
+}
+
+.work-info-item
 {
     margin-top:1em;
     display:flex;
@@ -283,7 +303,32 @@ h1
     font-weight:bold;
 }
 
+.company-name
+{
+    color:#5ec6af;
+    font-size:2em;
+    font-weight:bold;
+}
+
 .university-time
+{
+    color:#7a9c9d;
+    font-size:1.25em;
+}
+
+.work-info-container
+{
+    width:100%;
+    margin-top:1em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.work-time
 {
     color:#7a9c9d;
     font-size:1.25em;
@@ -294,6 +339,15 @@ h1
     margin: 0.25em 0;
     color:#8b8a85;
     font-size:1.25em;
+}
+
+.work-content
+{
+    background-color: #23c3ab;
+    color:#f0ede6;
+    font-size: 1em;
+    flex-grow:0;
+    padding:0.2em 0.4em;
 }
 
 .project-name
@@ -336,6 +390,8 @@ h1
 .tech-collect span
 {
     margin-right:0.25em;
+    margin-top:1em;
+    margin-bottom:1em;
     color:#f0ede6;
     font-size: 1em;
     flex-grow:0;
@@ -400,4 +456,9 @@ h1
     width:100%;
     text-align: center;
     text-decoration:none;
+}
+
+.green
+{
+    color:#5ec6af;
 }
