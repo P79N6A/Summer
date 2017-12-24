@@ -247,7 +247,7 @@ h1
 
 .project-info
 {
-    margin-top:2.5em;
+    margin-top:1em;
     display:flex;
     flex-direction:column;
     flex-wrap: nowrap;
@@ -291,8 +291,9 @@ h1
 
 .university-major
 {
+    margin: 0.25em 0;
     color:#8b8a85;
-    font-size:1.5em;
+    font-size:1.25em;
 }
 
 .project-name
@@ -305,10 +306,10 @@ h1
 
 .project-desc
 {
-    margin:0.25em 0;
+    margin:0.5em 0 0.5em 0;
     text-indent:2em;
     color:#8b8a85;
-    font-size:1.5em;
+    font-size:1.25em;
 }
 
 .project-row-container
